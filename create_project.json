@@ -1,0 +1,29 @@
+{
+  "authorId": 1,
+  "name": "Помощь приюту для животных",
+  "quickPeek": "Флекс",
+  "quickPeekPicture": "cHJvcGlza2FwYWdl",
+  "pollAddress": "https://example.org/survey",
+  "content": "Проект по сбору средств для бездомных животных, нуждающихся в питании и медиц",
+  "isPublic": false,
+  "isCompleted": true,
+  "currentMoney": 25000.00,
+  "wantedMoney": 75000.00,
+  "duration": 45,
+  "projectAccount": {
+    "accountType": "PHYSICAL",
+    "bic": 123456789,
+    "rasSchot": 123123123,
+    "korSchot": 321321321,
+    "fio": "Петрова Анна Сергеевна",
+    "inn": 1234567890,
+    "postAddress": "г. Санкт-Петербург, ул. Мира, д. 20",
+    "passportSeries": 4012,
+    "passportNumber": 654321,
+    "passportGivenBy": "ГУ МВД России по СПб",
+    "registrationAddress": "г. Санкт-Петербург, пр. Невский, д. 15",
+    "passportPageWithPhoto": "cHJvcGlza2FwYWdl",
+    "passportPageWithPropiska": "cHJvcGlza2FwYWdl",
+    "svidOPostanovkeNaUchetPhysLitsa": "cHJvcGlza2FwYWdl"
+  }
+}

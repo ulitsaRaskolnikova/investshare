@@ -6,7 +6,7 @@ import ulitsa.raskolnikova.investshare.dto.account.ProjectAccount;
 import java.math.BigDecimal;
 
 @Data
-public class Project {
+public class Project implements ResponseValue {
     private Integer id;
     private ProjectAccount projectAccount;
     private Integer authorId;

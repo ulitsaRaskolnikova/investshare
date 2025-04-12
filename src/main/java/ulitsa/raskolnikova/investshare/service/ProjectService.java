@@ -5,7 +5,10 @@ import org.hibernate.annotations.NotFound;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import ulitsa.raskolnikova.investshare.dto.Project;
+import ulitsa.raskolnikova.investshare.dto.ProjectResponse;
 import ulitsa.raskolnikova.investshare.entity.ProjectEntity;
+import ulitsa.raskolnikova.investshare.entity.UserEntity;
+import ulitsa.raskolnikova.investshare.exception.NoPermissionException;
 import ulitsa.raskolnikova.investshare.mapper.ProjectMapper;
 import ulitsa.raskolnikova.investshare.repository.ProjectRepository;
 
@@ -29,8 +32,11 @@ public class ProjectService {
                 .orElseThrow(ChangeSetPersister.NotFoundException::new));
     }
 
-    public List<Project> getAllProjects() {
-        return projectRepository.findAll().stream().map(projectMapper::toDto).collect(Collectors.toList());
+    public List<ProjectResponse> getAllProjects() {
+        return projectRepository.findByIsPublicTrue().stream()
+                .map(projectMapper::toDto)
+                .map(projectMapper::toResponseDto)
+                .collect(Collectors.toList());
     }
 
     public Project updateProject(Project project) throws ChangeSetPersister.NotFoundException {

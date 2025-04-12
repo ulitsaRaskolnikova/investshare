@@ -3,7 +3,7 @@ CREATE TYPE project_type AS ENUM ('phys', 'jur', 'ip');
 
 CREATE TABLE "user" (
     id SERIAL PRIMARY KEY,
-    username TEXT UNIQUE,
+    username TEXT,
     avatar BYTEA,
     email TEXT UNIQUE,
     balance DECIMAL(34, 2),

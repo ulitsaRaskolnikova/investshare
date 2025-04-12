@@ -1,13 +1,12 @@
 package ulitsa.raskolnikova.investshare.mapper.account;
 
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import ulitsa.raskolnikova.investshare.dto.Project;
 import ulitsa.raskolnikova.investshare.dto.account.IpProjectAccount;
 import ulitsa.raskolnikova.investshare.dto.account.JuridicalFaceProjectAccount;
 import ulitsa.raskolnikova.investshare.dto.account.PhysicalFaceProjectAccount;
 import ulitsa.raskolnikova.investshare.dto.account.ProjectAccount;
-import ulitsa.raskolnikova.investshare.entity.ProjectEntity;
 import ulitsa.raskolnikova.investshare.entity.account.IpProjectAccountEntity;
 import ulitsa.raskolnikova.investshare.entity.account.JuridicalFaceProjectAccountEntity;
 import ulitsa.raskolnikova.investshare.entity.account.PhysicalFaceProjectAccountEntity;

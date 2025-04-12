@@ -2,6 +2,7 @@ package ulitsa.raskolnikova.investshare.mapper;
 
 import org.mapstruct.*;
 import ulitsa.raskolnikova.investshare.dto.Project;
+import ulitsa.raskolnikova.investshare.dto.ProjectResponse;
 import ulitsa.raskolnikova.investshare.entity.ProjectEntity;
 import ulitsa.raskolnikova.investshare.mapper.account.ProjectAccountMapper;
 
@@ -19,7 +20,14 @@ public interface ProjectMapper {
     @Mapping(source = "author.id", target = "authorId")
     Project toDto(ProjectEntity projectEntity);
 
+    ProjectResponse toResponseDto(Project project);
+
     @Mapping(source = "authorId", target = "author.id")
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "devDiaries", ignore = true)
+    @Mapping(target = "followers", ignore = true)
+    @Mapping(target = "members", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateProjectFromDto(Project dto, @MappingTarget ProjectEntity entity);
 }

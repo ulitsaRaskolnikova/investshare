@@ -2,10 +2,7 @@ package ulitsa.raskolnikova.investshare.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
-import ulitsa.raskolnikova.investshare.entity.account.ProjectAccountEntity;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -54,4 +51,5 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
     private List<ProjectEntity> projects;
+
 }

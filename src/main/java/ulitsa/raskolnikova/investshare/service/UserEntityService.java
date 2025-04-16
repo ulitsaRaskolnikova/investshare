@@ -2,22 +2,27 @@ package ulitsa.raskolnikova.investshare.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ulitsa.raskolnikova.investshare.dto.Auth;
+import ulitsa.raskolnikova.investshare.entity.PasswordResetToken;
 import ulitsa.raskolnikova.investshare.entity.UserEntity;
 import ulitsa.raskolnikova.investshare.exception.InvalidBasicAuthorizationException;
+import ulitsa.raskolnikova.investshare.repository.PasswordTokenRepository;
 import ulitsa.raskolnikova.investshare.repository.UserEntityRepository;
+import ulitsa.raskolnikova.investshare.util.PasswordEncoder;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class UserEntityService {
-    private final Base64.Encoder encoder = Base64.getEncoder();
-    private final Base64.Decoder decoder = Base64.getDecoder();
+    private final PasswordEncoder passwordEncoder;
     private final UserEntityRepository userEntityRepository;
 
     public UserEntity createUser(UserEntity userEntity) {
-        userEntity.setPassword(encode(userEntity.getEmail(), userEntity.getPassword()));
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getEmail(), userEntity.getPassword()));
         return userEntityRepository.save(userEntity);
     }
 
@@ -25,29 +30,11 @@ public class UserEntityService {
         getUserEntity(authorization);
     }
 
-    private String encode(String email, String password) {
-        byte[] bytes = encoder.encode((email + ":" + password).getBytes(StandardCharsets.UTF_8));
-        return new String(bytes, StandardCharsets.UTF_8);
-    }
-
-    private Auth decode(String authorization) throws InvalidBasicAuthorizationException {
-        String[] encoded = authorization.split(" ");
-        if (encoded.length != 2) {
-            throw new InvalidBasicAuthorizationException("Invalid value of basic authorization");
-        }
-        byte[] bytes = decoder.decode(encoded[1]);
-        String[] emailAndPassword = new String(bytes, StandardCharsets.UTF_8).split(":");
-        if (emailAndPassword.length != 2) {
-            throw new InvalidBasicAuthorizationException("Invalid value of basic authorization");
-        }
-        return new Auth(emailAndPassword[0], emailAndPassword[1]);
-    }
-
     public UserEntity getUserEntity(String authorization) throws InvalidBasicAuthorizationException {
         if (authorization == null) {
             throw new InvalidBasicAuthorizationException("Authorization is required");
         }
-        Auth auth = decode(authorization);
+        Auth auth = passwordEncoder.decode(authorization);
         UserEntity user = userEntityRepository.findByEmail(auth.email())
                 .orElseThrow(() -> new InvalidBasicAuthorizationException(auth.email() + " not found"));
         if (!user.getPassword().equals(authorization.split(" ")[1])) {
@@ -56,5 +43,4 @@ public class UserEntityService {
         return user;
     }
 
-    private record Auth(String email, String password) {}
 }

@@ -2,9 +2,6 @@ package ulitsa.raskolnikova.investshare.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import ulitsa.raskolnikova.investshare.entity.account.ProjectAccountEntity;
 
@@ -38,29 +35,26 @@ public class ProjectEntity {
     @Column(name = "quick_peek_picture")
     private byte[] quickPeekPicture;
 
-    @Column(name = "poll_address", length = Integer.MAX_VALUE)
-    private String pollAddress;
+    @Column(name = "category", length = 255)
+    private String category;
 
-    @Column(name = "content", length = Integer.MAX_VALUE)
-    private String content;
+    @Column(name = "location", length = 255)
+    private String location;
+
+    @ColumnDefault("30")
+    @Column(name = "duration_days")
+    private Integer durationDays;
+
+    @Column(name = "wanted_money", precision = 34, scale = 2)
+    private BigDecimal wantedMoney;
 
     @ColumnDefault("true")
     @Column(name = "is_public")
     private Boolean isPublic;
 
-    @ColumnDefault("false")
-    @Column(name = "is_completed")
-    private Boolean isCompleted;
-
     @Column(name = "current_money", precision = 34, scale = 2)
     private BigDecimal currentMoney;
 
-    @Column(name = "wanted_money", precision = 34, scale = 2)
-    private BigDecimal wantedMoney;
-
-    @ColumnDefault("30")
-    @Column(name = "duration")
-    private Integer duration;
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_at")
     private Instant createdAt;

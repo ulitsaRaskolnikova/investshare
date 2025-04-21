@@ -12,20 +12,18 @@ CREATE TABLE "user" (
 );
 
 CREATE TABLE project (
-     id SERIAL PRIMARY KEY,
-     author_id INTEGER NOT NULL REFERENCES "user"(id),
-     name TEXT NOT NULL,
-     type project_type,
-     quick_peek TEXT,
-     quick_peek_picture BYTEA,
-     poll_address TEXT,
-     content TEXT,
-     is_public BOOLEAN DEFAULT TRUE,
-     is_completed BOOLEAN DEFAULT FALSE,
-     current_money DECIMAL(34, 2),
-     wanted_money DECIMAL(34, 2),
-     duration INTEGER DEFAULT 30,
-     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id SERIAL PRIMARY KEY,
+    author_id INTEGER NOT NULL REFERENCES "user"(id),
+    name TEXT NOT NULL,
+    quick_peek TEXT,
+    quick_peek_picture BYTEA,
+    category VARCHAR(255),
+    location VARCHAR(255),
+    duration_days INTEGER DEFAULT 30,
+    wanted_money DECIMAL(34, 2),
+    is_public BOOLEAN DEFAULT TRUE,
+    current_money DECIMAL(34, 2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE user_project_relation (
@@ -59,62 +57,58 @@ CREATE TABLE dev_diary (
 );
 
 CREATE TABLE physical_face_project_account (
-    project_id INTEGER PRIMARY KEY REFERENCES project(id),
-    BIC INTEGER,
-    ras_schot INTEGER,
-    kor_schot INTEGER,
-    FIO TEXT,
-    INN INTEGER,
-    passport_series INTEGER,
-    passport_number INTEGER,
-    passport_givenby TEXT,
-    registration_address TEXT,
+    project_id INT NOT NULL PRIMARY KEY,
+    bic VARCHAR(255),
+    ras_schot VARCHAR(255),
+    kor_schot VARCHAR(255),
+    fio TEXT,
+    inn VARCHAR(255),
     post_address TEXT,
-    passport_page_with_photo BYTEA,
-    passport_page_with_propiska BYTEA,
+    passport_series VARCHAR(255),  
+    passport_number VARCHAR(255),  
+    passport_givenby TEXT,         
+    registration_address TEXT,     
+    passport_page_with_photo BYTEA, 
+    passport_page_with_propiska BYTEA, 
     svid_o_postanovke_na_uchet_phys_litsa BYTEA
 );
 
 CREATE TABLE juridical_face_project_account (
-    project_id INTEGER PRIMARY KEY REFERENCES project(id),
-    acts_on_base TEXT,
-    position TEXT,
-    BIC INTEGER,
-    ras_schot INTEGER,
-    kor_schot INTEGER,
-    FIO TEXT,
-    full_organisation_name TEXT,
-    short_organisation_name TEXT,
-    INN INTEGER,
-    OGRN INTEGER,
-    KPP TEXT,
-    jur_address TEXT,
-    fact_address TEXT,
+    project_id INT NOT NULL PRIMARY KEY,
+
+    bic VARCHAR(255),
+    ras_schot VARCHAR(255),
+    kor_schot VARCHAR(255),
+    fio TEXT,
+    inn VARCHAR(255),
     post_address TEXT,
-    svid_o_registratsii_jur_litsa BYTEA,
-    svid_o_postanovke_na_nalog_uchet BYTEA,
-    protocol_o_nasznachenii_litsa BYTEA,
-    USN BYTEA,
-    ustav BYTEA
+
+    acts_on_base TEXT,
+    represented_by TEXT,
+    full_organisation_name TEXT,
+    abbreviated_name_of_organisation TEXT,
+    ogrn VARCHAR(255),
+    kpp TEXT,
+    legal_address TEXT,
+    actual_address TEXT
 );
 
+
 CREATE TABLE ip_project_account (
-    project_id INTEGER PRIMARY KEY REFERENCES project(id),
-    BIC INTEGER,
-    ras_schot INTEGER,
-    kor_schot INTEGER,
-    FIO TEXT,
-    ip_svid_serial INTEGER,
-    ip_svid_number INTEGER,
-    ip_svid_givenby TEXT,
-    INN INTEGER,
-    OGRN INTEGER,
-    jur_address TEXT,
-    fact_address TEXT,
+    project_id INT NOT NULL PRIMARY KEY,
+
+    bic VARCHAR(255),
+    ras_schot VARCHAR(255),
+    kor_schot VARCHAR(255),
+    fio TEXT,
+    inn VARCHAR(255),
     post_address TEXT,
-    svid_o_postanovke_na_nalog_uchet BYTEA,
-    ip_passport_photo_page BYTEA,
-    ip_passport_propiska BYTEA,
-    USN BYTEA,
-    OGRNIP BYTEA
+
+    ie_certificate_series VARCHAR(255),
+    ie_certificate_number VARCHAR(255),
+    ie_certificate_issued TEXT,
+    ogrn VARCHAR(255),
+    legal_address TEXT,
+    actual_address TEXT
 );
+

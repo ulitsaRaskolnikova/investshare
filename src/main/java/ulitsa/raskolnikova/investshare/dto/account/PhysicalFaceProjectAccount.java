@@ -3,11 +3,11 @@ package ulitsa.raskolnikova.investshare.dto.account;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class PhysicalFaceProjectAccount extends ProjectAccount {
-    private Integer passportSeries;
-    private Integer passportNumber;
+    private String passportSeries;
+    private String passportNumber;
     private String passportGivenBy;
     private String registrationAddress;
     private byte[] passportPageWithPhoto;

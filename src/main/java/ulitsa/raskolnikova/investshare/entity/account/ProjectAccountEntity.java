@@ -18,19 +18,19 @@ public abstract class ProjectAccountEntity {
     private ProjectEntity project;
 
     @Column(name = "bic")
-    private Integer bic;
+    private String bic;  
 
     @Column(name = "ras_schot")
-    private Integer rasSchot;
+    private String rasSchot;  
 
     @Column(name = "kor_schot")
-    private Integer korSchot;
+    private String korSchot;  
 
     @Column(name = "fio", length = Integer.MAX_VALUE)
     private String fio;
 
     @Column(name = "inn")
-    private Integer inn;
+    private String inn;  
 
     @Column(name = "post_address", length = Integer.MAX_VALUE)
     private String postAddress;

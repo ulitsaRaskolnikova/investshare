@@ -8,16 +8,15 @@ import java.math.BigDecimal;
 @Data
 public class Project implements ResponseValue {
     private Integer id;
-    private ProjectAccount projectAccount;
     private Integer authorId;
     private String name;
     private String quickPeek;
     private byte[] quickPeekPicture;
-    private String pollAddress;
-    private String content;
-    private Boolean isPublic;
-    private Boolean isCompleted;
-    private BigDecimal currentMoney;
+    private String category;
+    private String location;
+    private Integer durationDays;
     private BigDecimal wantedMoney;
-    private Integer duration;
+    private Boolean isPublic;
+    private ProjectAccount projectAccount;
+    private BigDecimal currentMoney;
 }

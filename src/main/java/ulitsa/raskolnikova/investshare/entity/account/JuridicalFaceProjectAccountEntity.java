@@ -12,41 +12,26 @@ import lombok.EqualsAndHashCode;
 @Entity
 public class JuridicalFaceProjectAccountEntity extends ProjectAccountEntity {
     @Column(name = "acts_on_base", length = Integer.MAX_VALUE)
-    private String actsOnBase;
+    private String actsOnTheBasisOf;
 
-    @Column(name = "position", length = Integer.MAX_VALUE)
-    private String position;
+    @Column(name = "represented_by", length = Integer.MAX_VALUE)
+    private String representedBy;
 
     @Column(name = "full_organisation_name", length = Integer.MAX_VALUE)
-    private String fullOrganisationName;
+    private String fullNameOfTheOrganization;
 
-    @Column(name = "short_organisation_name", length = Integer.MAX_VALUE)
-    private String shortOrganisationName;
+    @Column(name = "abbreviated_name_of_organisation", length = Integer.MAX_VALUE)
+    private String abbreviatedNameOfTheOrganization;
 
     @Column(name = "ogrn")
-    private Integer ogrn;
+    private String ogrn;
 
     @Column(name = "kpp", length = Integer.MAX_VALUE)
     private String kpp;
 
-    @Column(name = "jur_address", length = Integer.MAX_VALUE)
-    private String jurAddress;
+    @Column(name = "legal_address", length = Integer.MAX_VALUE)
+    private String legalAddress;
 
-    @Column(name = "fact_address", length = Integer.MAX_VALUE)
-    private String factAddress;
-
-    @Column(name = "svid_o_registratsii_jur_litsa")
-    private byte[] svidORegistratsiiJurLitsa;
-
-    @Column(name = "svid_o_postanovke_na_nalog_uchet")
-    private byte[] svidOPostanovkeNaNalogUchet;
-
-    @Column(name = "protocol_o_nasznachenii_litsa")
-    private byte[] protocolONasznacheniiLitsa;
-
-    @Column(name = "usn")
-    private byte[] usn;
-
-    @Column(name = "ustav")
-    private byte[] ustav;
+    @Column(name = "actual_address", length = Integer.MAX_VALUE)
+    private String actualAddress;
 }

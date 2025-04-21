@@ -12,10 +12,10 @@ import lombok.EqualsAndHashCode;
 @Entity
 public class PhysicalFaceProjectAccountEntity extends ProjectAccountEntity {
     @Column(name = "passport_series")
-    private Integer passportSeries;
+    private String passportSeries;
 
     @Column(name = "passport_number")
-    private Integer passportNumber;
+    private String passportNumber;
 
     @Column(name = "passport_givenby", length = Integer.MAX_VALUE)
     private String passportGivenBy;

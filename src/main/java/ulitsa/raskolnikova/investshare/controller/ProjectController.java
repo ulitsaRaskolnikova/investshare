@@ -32,8 +32,11 @@ public class ProjectController {
     public ResponseEntity<ResponseValue> getProjectById(@PathVariable int id,
                                                         @RequestHeader(required = false) String authorization)
             throws ChangeSetPersister.NotFoundException, InvalidBasicAuthorizationException {
-        UserEntity userEntity = userEntityService.getUserEntity(authorization);
         Project project = projectService.getProjectById(id);
+        if (authorization == null && project.getIsPublic()) {
+            return ResponseEntity.ok(projectMapper.toResponseDto(project));
+        }
+        UserEntity userEntity = userEntityService.getUserEntity(authorization);
         if (userEntity == null && project.getIsPublic()) {
             return ResponseEntity.ok(projectMapper.toResponseDto(project));
         }

@@ -11,36 +11,21 @@ import lombok.EqualsAndHashCode;
 @Table(name = "ip_project_account")
 @Entity
 public class IpProjectAccountEntity extends ProjectAccountEntity {
-    @Column(name = "ip_svid_serial")
-    private Integer ipSvidSerial;
+    @Column(name = "ie_certificate_series")
+    private String ieCertificateSeries;
 
-    @Column(name = "ip_svid_number")
-    private Integer ipSvidNumber;
+    @Column(name = "ie_certificate_number")
+    private String ieCertificateNumber;
 
-    @Column(name = "ip_svid_givenby", length = Integer.MAX_VALUE)
-    private String ipSvidGivenby;
+    @Column(name = "ie_certificate_issued", length = Integer.MAX_VALUE)
+    private String ieCertificateIssued;
 
     @Column(name = "ogrn")
-    private Integer ogrn;
+    private String ogrn;
 
-    @Column(name = "jur_address", length = Integer.MAX_VALUE)
-    private String jurAddress;
+    @Column(name = "legal_address", length = Integer.MAX_VALUE)
+    private String legalAddress;
 
-    @Column(name = "fact_address", length = Integer.MAX_VALUE)
-    private String factAddress;
-
-    @Column(name = "svid_o_postanovke_na_nalog_uchet")
-    private byte[] svidOPostanovkeNaNalogUchet;
-
-    @Column(name = "ip_passport_photo_page")
-    private byte[] ipPassportPhotoPage;
-
-    @Column(name = "ip_passport_propiska")
-    private byte[] ipPassportPropiska;
-
-    @Column(name = "usn")
-    private byte[] usn;
-
-    @Column(name = "ogrnip")
-    private byte[] ogrnip;
+    @Column(name = "actual_address", length = Integer.MAX_VALUE)
+    private String actualAddress;
 }

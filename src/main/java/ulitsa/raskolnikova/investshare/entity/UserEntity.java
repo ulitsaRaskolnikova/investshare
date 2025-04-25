@@ -3,15 +3,23 @@ package ulitsa.raskolnikova.investshare.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "\"user\"")
-public class UserEntity {
+public class UserEntity implements UserDetails {
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -51,5 +59,16 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
     private List<ProjectEntity> projects;
+
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) {
+            createdAt = Instant.now();
+        }
+        if (balance == null) {
+            balance = BigDecimal.ZERO;
+        }
+    }
+
 
 }

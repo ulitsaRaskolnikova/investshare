@@ -1,7 +1,7 @@
-package ulitsa.raskolnikova.investshare.dto;
+package ulitsa.raskolnikova.investshare.dto.project;
 
 import lombok.Data;
-import ulitsa.raskolnikova.investshare.dto.account.ProjectAccount;
+import ulitsa.raskolnikova.investshare.dto.project.account.ProjectAccount;
 
 import java.math.BigDecimal;
 

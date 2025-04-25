@@ -1,8 +1,8 @@
-package ulitsa.raskolnikova.investshare.mapper.account;
+package ulitsa.raskolnikova.investshare.mapper.project.account;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ulitsa.raskolnikova.investshare.dto.account.JuridicalFaceProjectAccount;
+import ulitsa.raskolnikova.investshare.dto.project.account.JuridicalFaceProjectAccount;
 import ulitsa.raskolnikova.investshare.entity.account.JuridicalFaceProjectAccountEntity;
 
 @Mapper(componentModel = "spring")

@@ -28,6 +28,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.liquibase:liquibase-core'
     implementation("org.springframework:spring-context-support:6.2.5")
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation("io.jsonwebtoken:jjwt:0.2")
     implementation("com.sun.mail:jakarta.mail:2.0.1")
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'

@@ -1,4 +1,4 @@
-package ulitsa.raskolnikova.investshare.dto;
+package ulitsa.raskolnikova.investshare.dto.project;
 
 public enum AccountType {
     PHYSICAL,

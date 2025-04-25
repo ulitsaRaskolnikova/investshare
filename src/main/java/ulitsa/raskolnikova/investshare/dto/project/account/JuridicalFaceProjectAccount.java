@@ -1,7 +1,6 @@
-package ulitsa.raskolnikova.investshare.dto.account;
+package ulitsa.raskolnikova.investshare.dto.project.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

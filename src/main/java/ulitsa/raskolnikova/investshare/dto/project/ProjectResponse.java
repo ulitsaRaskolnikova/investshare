@@ -1,6 +1,4 @@
-package ulitsa.raskolnikova.investshare.dto;
-
-import ulitsa.raskolnikova.investshare.dto.account.ProjectAccount;
+package ulitsa.raskolnikova.investshare.dto.project;
 
 import java.math.BigDecimal;
 

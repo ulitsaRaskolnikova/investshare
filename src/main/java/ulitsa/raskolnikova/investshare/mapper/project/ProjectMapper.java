@@ -1,10 +1,10 @@
-package ulitsa.raskolnikova.investshare.mapper;
+package ulitsa.raskolnikova.investshare.mapper.project;
 
 import org.mapstruct.*;
-import ulitsa.raskolnikova.investshare.dto.Project;
-import ulitsa.raskolnikova.investshare.dto.ProjectResponse;
+import ulitsa.raskolnikova.investshare.dto.project.Project;
+import ulitsa.raskolnikova.investshare.dto.project.ProjectResponse;
 import ulitsa.raskolnikova.investshare.entity.ProjectEntity;
-import ulitsa.raskolnikova.investshare.mapper.account.ProjectAccountMapper;
+import ulitsa.raskolnikova.investshare.mapper.project.account.ProjectAccountMapper;
 
 @Mapper(componentModel = "spring", uses = ProjectAccountMapper.class)
 public interface ProjectMapper {

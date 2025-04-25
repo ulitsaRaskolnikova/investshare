@@ -30,3 +30,9 @@ logging:
 
 recover:
   url: ${RECOVER_URL}
+
+jwt:
+  secret-key: ${SECRET_KEY}
+
+password:
+  salt: ${PASSWORD_SALT}

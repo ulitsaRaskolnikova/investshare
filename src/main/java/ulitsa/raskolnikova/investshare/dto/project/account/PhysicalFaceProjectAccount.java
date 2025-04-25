@@ -1,4 +1,4 @@
-package ulitsa.raskolnikova.investshare.dto.account;
+package ulitsa.raskolnikova.investshare.dto.project.account;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

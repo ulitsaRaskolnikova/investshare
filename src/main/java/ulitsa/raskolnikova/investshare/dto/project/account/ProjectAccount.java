@@ -1,10 +1,9 @@
-package ulitsa.raskolnikova.investshare.dto.account;
+package ulitsa.raskolnikova.investshare.dto.project.account;
 
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
-import ulitsa.raskolnikova.investshare.dto.AccountType;
 
 
 @Data

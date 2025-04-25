@@ -1,4 +1,4 @@
-package ulitsa.raskolnikova.investshare.dto.account;
+package ulitsa.raskolnikova.investshare.dto.project.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

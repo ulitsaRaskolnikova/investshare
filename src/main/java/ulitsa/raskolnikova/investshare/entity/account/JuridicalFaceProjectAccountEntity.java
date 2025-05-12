@@ -34,4 +34,19 @@ public class JuridicalFaceProjectAccountEntity extends ProjectAccountEntity {
 
     @Column(name = "actual_address", length = Integer.MAX_VALUE)
     private String actualAddress;
+
+    @Column(name = "svid_o_gos_reg_jur_face")
+    private byte[] svidOGosRegJurFace;
+
+    @Column(name = "svid_o_post_na_inn")
+    private byte[] svidOPostNaINN;
+
+    @Column(name = "prot_o_nazn_lica")
+    private byte[] protONaznLica;
+
+    @Column(name = "uved_o_post_na_usn")
+    private byte[] uvedOPostNaUSN;
+
+    @Column(name = "deistv_na_osnovanii")
+    private byte[] deistvNaOsnovanii;
 }

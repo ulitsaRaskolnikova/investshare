@@ -90,7 +90,13 @@ CREATE TABLE juridical_face_project_account (
     ogrn VARCHAR(255),
     kpp TEXT,
     legal_address TEXT,
-    actual_address TEXT
+    actual_address TEXT,
+
+    svid_o_gos_reg_jur_face BYTEA,
+    svid_o_post_na_inn BYTEA,
+    prot_o_nazn_lica BYTEA,
+    uved_o_post_na_usn BYTEA,
+    deistv_na_osnovanii BYTEA
 );
 
 
@@ -109,6 +115,12 @@ CREATE TABLE ip_project_account (
     ie_certificate_issued TEXT,
     ogrn VARCHAR(255),
     legal_address TEXT,
-    actual_address TEXT
+    actual_address TEXT,
+
+    passport_page_with_photo BYTEA,
+    passport_page_with_propiska BYTEA,
+    svid_o_postanovke_na_uchet_phys_litsa BYTEA,
+    svid_o_reg_indiv_predp BYTEA,
+    uved_o_post_na_usn BYTEA
 );
 

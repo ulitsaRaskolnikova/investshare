@@ -17,4 +17,10 @@ public class IpProjectAccount extends ProjectAccount {
     private String ogrn;
     private String legalAddress;
     private String actualAddress;
+
+    private byte[] passportPageWithPhoto;
+    private byte[] passportPageWithPropiska;
+    private byte[] svidOPostanovkeNaUchetPhysLitsa;
+    private byte[] svidORegIndivPredp;
+    private byte[] uvedOPostNaUSN;
 }

@@ -28,4 +28,19 @@ public class IpProjectAccountEntity extends ProjectAccountEntity {
 
     @Column(name = "actual_address", length = Integer.MAX_VALUE)
     private String actualAddress;
+
+    @Column(name = "passport_page_with_photo")
+    private byte[] passportPageWithPhoto;
+
+    @Column(name = "passport_page_with_propiska")
+    private byte[] passportPageWithPropiska;
+
+    @Column(name = "svid_o_postanovke_na_uchet_phys_litsa")
+    private byte[] svidOPostanovkeNaUchetPhysLitsa;
+
+    @Column(name = "svid_o_reg_indiv_predp")
+    private byte[] svidORegIndivPredp;
+
+    @Column(name = "uved_o_post_na_usn")
+    private byte[] uvedOPostNaUSN;
 }

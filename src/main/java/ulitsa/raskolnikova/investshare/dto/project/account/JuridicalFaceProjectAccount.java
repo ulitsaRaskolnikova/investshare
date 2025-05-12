@@ -17,4 +17,10 @@ public class JuridicalFaceProjectAccount extends ProjectAccount {
     private String kpp;
     private String legalAddress;
     private String actualAddress;
+
+    private byte[] svidOGosRegJurFace;
+    private byte[] svidOPostNaINN;
+    private byte[] protONaznLica;
+    private byte[] uvedOPostNaUSN;
+    private byte[] deistvNaOsnovanii;
 }

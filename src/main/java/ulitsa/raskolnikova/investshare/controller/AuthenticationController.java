@@ -9,7 +9,6 @@ import ulitsa.raskolnikova.investshare.dto.auth.AuthenticationToken;
 import ulitsa.raskolnikova.investshare.dto.auth.CreateUserDto;
 import ulitsa.raskolnikova.investshare.dto.auth.UserResponse;
 import ulitsa.raskolnikova.investshare.entity.UserEntity;
-import ulitsa.raskolnikova.investshare.exception.InvalidBasicAuthorizationException;
 import ulitsa.raskolnikova.investshare.mapper.user.UserMapper;
 import ulitsa.raskolnikova.investshare.service.AuthenticationService;
 import ulitsa.raskolnikova.investshare.service.PasswordRecoverService;

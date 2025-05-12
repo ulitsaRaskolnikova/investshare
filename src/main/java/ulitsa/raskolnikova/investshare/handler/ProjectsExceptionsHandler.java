@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import ulitsa.raskolnikova.investshare.exception.ExpiredRecoverPasswordTokenException;
 import ulitsa.raskolnikova.investshare.exception.InvalidBasicAuthorizationException;
 
+import java.sql.SQLException;
 import java.util.NoSuchElementException;
 
 @ControllerAdvice
@@ -20,7 +21,8 @@ public class ProjectsExceptionsHandler {
             NoSuchElementException.class,
             ExpiredRecoverPasswordTokenException.class,
             IllegalArgumentException.class,
-            InvalidBasicAuthorizationException.class
+            InvalidBasicAuthorizationException.class,
+            SQLException.class
     })
     public ResponseEntity<String> handleNoSuchElementException(Exception ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());

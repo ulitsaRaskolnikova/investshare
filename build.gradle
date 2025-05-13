@@ -27,21 +27,148 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.liquibase:liquibase-core'
-    implementation("org.springframework:spring-context-support:6.2.5")
-    implementation "org.springframework.boot:spring-boot-starter-security"
-    implementation("io.jsonwebtoken:jjwt:0.2")
-    implementation("com.sun.mail:jakarta.mail:2.0.1")
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springframework:spring-context-support:6.2.5'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt:0.2'
+    implementation 'com.sun.mail:jakarta.mail:2.0.1'
     implementation 'org.mapstruct:mapstruct:1.6.3'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
+    runtimeOnly 'org.postgresql:postgresql'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// === bootJar Configuration ===
+bootJar {
+    archiveClassifier.set('')
+    manifest {
+        attributes(
+                'Main-Class': 'ulitsa.raskolnikova.investshare.InvestshareApplication',
+                'Version': version
+        )
+    }
+}
+
+// Disable default jar task
+jar {
+    enabled = false
+}
+
+// === SCP Task Configuration ===
+def scpUser = providers.gradleProperty("scpUser")
+def scpHost = providers.gradleProperty("scpHost")
+def scpPath = providers.gradleProperty("scpPath")
+def scpPort = providers.gradleProperty("scpPort")
+
+tasks.register('scp', Exec) {
+    dependsOn tasks.named('bootJar')
+
+    def jarFile = layout.buildDirectory.file("libs/${rootProject.name}-${version}.jar")
+
+    doFirst {
+        if (!scpUser.present || !scpHost.present || !scpPath.present || !scpPort.present) {
+            throw new GradleException("scpUser, scpHost, scpPath, and scpPort must be specified in gradle.properties")
+        }
+
+        if (!jarFile.get().asFile.exists()) {
+            throw new GradleException("JAR file not found: ${jarFile.get().asFile}")
+        }
+    }
+
+    commandLine 'scp',
+            '-P', scpPort.get(),
+            jarFile.get().asFile.absolutePath,
+            "${scpUser.get()}@${scpHost.get()}:${scpPath.get()}"
+}
+
+// === SourceSets Configuration ===
+sourceSets {
+    main {
+        java.srcDirs = ['src/main/java']
+    }
+    alt {
+        java.srcDirs = ['alt-src']
+        resources.srcDirs = sourceSets.main.resources.srcDirs
+        compileClasspath += sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.runtimeClasspath
+    }
+}
+
+// === Custom Tasks ===
+
+// Task to clean alt-src and previous alt JAR
+tasks.register('cleanAlt') {
+    group = 'build'
+    description = 'Cleans alt-src and previous alt JAR before rebuilding'
+
+    doLast {
+        delete file('alt-src')
+        delete file("build/libs/${rootProject.name}-${version}-alt.jar")
+        println("🧹 Removed alt-src and previous alt JAR")
+    }
+}
+
+// Task to rename identifiers and copy sources
+tasks.register('renameAndCopySources', Copy) {
+    group = 'helping'
+    description = 'Renames identifiers in Java sources and copies to alt-src'
+
+    def renamingMap = ['Project': 'FlexProject']
+    def srcDirs = sourceSets.main.java.srcDirs
+    def dest = file('alt-src')
+
+    from(srcDirs) {
+        include '**/*.java'
+    }
+    into(dest)
+
+    filter { String line ->
+        renamingMap.inject(line) { result, entry ->
+            result.replace(entry.key, entry.value)
+        }
+    }
+
+    rename { String fileName ->
+        renamingMap.inject(fileName) { result, entry ->
+            result.replace(entry.key, entry.value)
+        }.tap { println("Renamed $fileName to $it") }
+    }
+
+    doLast {
+        println("[DEBUG] Sources copied and renamed into ${destinationDir}")
+    }
+}
+
+// Task to create alt JAR
+tasks.register('altJar', Jar) {
+    group = 'build'
+    description = 'Creates JAR from alt-src'
+
+    dependsOn tasks.named('cleanAlt'), tasks.named('renameAndCopySources'), tasks.named('compileAltJava')
+
+    from sourceSets.alt.output
+    archiveClassifier.set('alt')
+
+    manifest {
+        attributes(
+                'Main-Class': 'ulitsa.raskolnikova.investshare.InvestshareApplication',
+                'Version': version
+        )
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    doLast {
+        println("✅ altJar created at: ${archiveFile.get().asFile.absolutePath}")
+    }
 }

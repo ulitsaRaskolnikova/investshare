@@ -1,0 +1,27 @@
+package ulitsa.raskolnikova.investshare.dto.project.account;
+
+
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import lombok.Data;
+
+
+@Data
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        property = "accountType",
+        visible = true
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = PhysicalFaceFlexProjectAccount.class, name = "PHYSICAL"),
+        @JsonSubTypes.Type(value = JuridicalFaceFlexProjectAccount.class, name = "LEGAL"),
+        @JsonSubTypes.Type(value = IpFlexProjectAccount.class, name = "ENTREPRENEUR")
+})
+public abstract class FlexProjectAccount {
+    private String bic;
+    private String rasSchot;
+    private String korSchot;
+    private String fio;
+    private String inn;
+    private String postAddress;
+}
